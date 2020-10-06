@@ -1,8 +1,12 @@
 const express = require('express');         
 const app = express();
 
-app.get('/', (req, res) => {
-    res.send('hello from bun');
+app.get('/date/:date', (req, res) => {
+    const param = req.params.date;
+    let date;
+    if(param == 'today') date = new Date();  
+    else date = new Date(param);
+    res.json({'unix': date.getTime(), 'utc': date.toUTCString()});
 })
 
 
